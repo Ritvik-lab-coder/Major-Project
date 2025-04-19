@@ -1,0 +1,10 @@
+opencv-python
+scikit-image
+numpy
+scikit-learn
+xgboost
+catboost
+opencv-python
+jupyter
+ipykernel
+tqdm
