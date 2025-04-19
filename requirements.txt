@@ -8,3 +8,6 @@ opencv-python
 jupyter
 ipykernel
 tqdm
+setuptools
+
+-e .
