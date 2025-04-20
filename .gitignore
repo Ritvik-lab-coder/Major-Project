@@ -2,3 +2,8 @@ venv/
 data
 logs
 data_preprocessed
+
+NutriScan.egg-info
+
+**/*.pyc
+**/__pycache__/

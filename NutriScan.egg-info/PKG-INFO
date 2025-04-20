@@ -15,7 +15,6 @@ Requires-Dist: ipykernel
 Requires-Dist: tqdm
 Requires-Dist: setuptools
 Requires-Dist: psycopg2
-Requires-Dist: tensorflow==2.19.0
 Dynamic: author
 Dynamic: author-email
 Dynamic: requires-dist

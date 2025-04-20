@@ -10,4 +10,3 @@ ipykernel
 tqdm
 setuptools
 psycopg2
-tensorflow==2.19.0

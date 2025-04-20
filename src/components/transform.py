@@ -17,7 +17,7 @@ DB_CONFIG = {
 }
 
 IMAGE_SIZE = (128, 128)  # Resize image for consistent HOG extraction size
-VECTOR_SIZE = 256  # Fixed vector size for HOG features
+VECTOR_SIZE = 512  # Fixed vector size for HOG features
 
 def extract_hog_features(image_path):
     """
@@ -31,11 +31,11 @@ def extract_hog_features(image_path):
     image_resized = cv2.resize(image, IMAGE_SIZE)
     
     # Convert to grayscale if working with single channel
-    image_gray = cv2.cvtColor(image_resized, cv2.COLOR_BGR2GRAY)
+    # image_gray = cv2.cvtColor(image_resized, cv2.COLOR_BGR2GRAY)
     
     # Extract HOG features
     # Using image_gray for grayscale or image_resized for color images
-    features, _ = hog(image_gray, pixels_per_cell=(8, 8), cells_per_block=(2, 2), visualize=True)
+    features, _ = hog(image_resized, pixels_per_cell=(8, 8), cells_per_block=(2, 2), visualize=True, channel_axis=-1)
 
     # Ensure the features are of fixed size (VECTOR_SIZE), truncate or pad
     features = features[:VECTOR_SIZE]  # Truncate if necessary
@@ -56,7 +56,7 @@ def insert_vector_to_db(table, vector_str, label, conn):
         )
     conn.commit()
 
-def process_category(category: str, base_dir: str = "data_preprocessed"):
+def process_category(category: str, base_dir: str = "data"):
     """
     Processes a category (nail, hair, teeth), extracts HOG features,
     and stores them in the corresponding table.
@@ -91,5 +91,5 @@ def validate_path(path: str) -> None:
         raise CustomException(f"Path does not exist: {path}")
 
 if __name__ == "__main__":
-    for cat in ["nail", "hair", "teeth"]:
+    for cat in ["hair","teeth","nail"]:
         process_category(cat)
