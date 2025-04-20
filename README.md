@@ -1,23 +1,79 @@
-# Instructions to run
+# 🧠 NutriScan - Data Pipeline Instructions
 
-1. Download the data from drive, unzip and place in the root directory
-2. Install the required libraries by running `pip install -r requirements.txt`
-3. Run the script `python -m src.components.ingest` from the root to start data ingestion
-4. Run the following sql script to create database and tables
-    - CREATE DATABASE nutriscan
-    - CREATE TABLE nail (
-        id SERIAL PRIMARY KEY,
-        vector TEXT NOT NULL,
-        label TEXT NOT NULL
-    );
-    - CREATE TABLE hair (
-        id SERIAL PRIMARY KEY,
-        vector TEXT NOT NULL,
-        label TEXT NOT NULL
-    );
-    - CREATE TABLE teeth (
-        id SERIAL PRIMARY KEY,
-        vector TEXT NOT NULL,
-        label TEXT NOT NULL
-    );
-5. Run the script `python -m src.components.transform` from the root to start data transformation
+Follow the steps below to run the full data pipeline for **NutriScan**, from data ingestion to feature extraction and database insertion.
+
+---
+
+## 📦 1. Setup
+
+1. **Download and Extract Dataset**  
+   - Download the dataset from the shared Google Drive link.  
+   - Unzip the contents and place the extracted `data` folder in the **root directory** of the project.
+
+2. **Install Dependencies**  
+   Run the following command in your terminal:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+---
+
+## 📥 2. Data Ingestion
+
+Run the data ingestion script to preprocess raw images:
+```bash
+python -m src.components.ingest
+```
+
+This will create a new folder named `data_preprocessed` containing cleaned images for **nail**, **hair**, and **teeth**.
+
+---
+
+## 📂 3. PostgreSQL Database Setup
+
+Create a PostgreSQL database and required tables:
+
+```sql
+-- Create the database
+CREATE DATABASE nutriscan;
+
+-- Create table for Nail images
+CREATE TABLE nail (
+    id SERIAL PRIMARY KEY,
+    vector TEXT NOT NULL,
+    label TEXT NOT NULL
+);
+
+-- Create table for Hair images
+CREATE TABLE hair (
+    id SERIAL PRIMARY KEY,
+    vector TEXT NOT NULL,
+    label TEXT NOT NULL
+);
+
+-- Create table for Teeth images
+CREATE TABLE teeth (
+    id SERIAL PRIMARY KEY,
+    vector TEXT NOT NULL,
+    label TEXT NOT NULL
+);
+```
+
+Ensure your PostgreSQL server is running and credentials are correctly set in the script before proceeding.
+
+---
+
+## 🔄 4. Data Transformation
+
+Run the transformation script to convert images into HOG feature vectors and store them in the database:
+
+```bash
+python -m src.components.transform
+```
+
+This will:
+- Convert all preprocessed images to HOG feature vectors (fixed length: 256)
+- Store the vector and its associated label (disease) in the corresponding database table
+
+---
+
