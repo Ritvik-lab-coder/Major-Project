@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.svm import SVC
+from sklearn.ensemble import VotingClassifier
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import accuracy_score, classification_report
 from sklearn.preprocessing import LabelEncoder
@@ -13,7 +14,7 @@ DB_CONFIG = {
     "port": "5432",
     "database": "nutriscan",
     "user": "postgres",
-    "password": "Shriram@321"
+    "password": "postgres"
 }
 
 # --- Fetch Data from PostgreSQL ---
@@ -34,14 +35,21 @@ def prepare_data(df):
     le = LabelEncoder()
     y = le.fit_transform(df['label'].values)
 
-    return train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
+    return train_test_split(X, y, test_size=0.2, random_state=42)
 
 # --- Evaluate ML models ---
 def evaluate_models(X_train, X_test, y_train, y_test):
     models = {
-        "SVC": SVC(),
-        "KNN_3": KNeighborsClassifier(n_neighbors=3),
-        "KNN_5": KNeighborsClassifier(n_neighbors=5)
+        # "SVC": SVC(kernel="linear", probability=True, random_state=42),
+        # "KNN_3": KNeighborsClassifier(n_neighbors=3),
+        # "KNN_5": KNeighborsClassifier(n_neighbors=5)
+        "SVC + KNN": VotingClassifier(
+            estimators=[
+                ('svc', SVC(kernel="linear", probability=True, random_state=42)),
+                ('knn', KNeighborsClassifier()),
+            ],
+            voting='soft'
+        )
     }
 
     for name, model in models.items():
