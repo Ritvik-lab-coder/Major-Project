@@ -72,8 +72,22 @@ python -m src.components.transform
 ```
 
 This will:
-- Convert all preprocessed images to HOG feature vectors (fixed length: 256)
+- Convert all preprocessed images to feature vectors using MobileNetV2
 - Store the vector and its associated label (disease) in the corresponding database table
+
+---
+
+## 🔄 4. Model Training
+
+Run the model training script to train the models for nail, hair and teeth:
+
+```bash
+python -m src.components.train
+```
+
+This will:
+- Train the model for nail, hair and teeth by fetching vectors from the database
+- Convert the model to pkl file, and store in the artifacts table
 
 ---
 
