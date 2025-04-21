@@ -77,7 +77,7 @@ This will:
 
 ---
 
-## 🔄 4. Model Training
+## 🔄 5. Model Training
 
 Run the model training script to train the models for nail, hair and teeth:
 
