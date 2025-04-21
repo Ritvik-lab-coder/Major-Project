@@ -8,8 +8,10 @@ NutriScan.egg-info/top_level.txt
 src/__init__.py
 src/exception.py
 src/logger.py
+src/utils.py
 src/components/__init__.py
 src/components/ingest.py
+src/components/train.py
 src/components/transform.py
 src/components/preprocessing/__init__.py
 src/components/preprocessing/hair_preprocessor.py

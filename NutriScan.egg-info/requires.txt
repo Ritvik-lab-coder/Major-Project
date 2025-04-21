@@ -10,3 +10,5 @@ ipykernel
 tqdm
 setuptools
 psycopg2
+dill
+tensorflow
