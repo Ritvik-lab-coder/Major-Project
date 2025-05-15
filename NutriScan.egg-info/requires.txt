@@ -4,11 +4,14 @@ numpy
 scikit-learn
 xgboost
 catboost
-opencv-python
 jupyter
 ipykernel
 tqdm
 setuptools
 psycopg2
 dill
+flask
+flask-cors
+joblib
+psycopg2-binary
 tensorflow

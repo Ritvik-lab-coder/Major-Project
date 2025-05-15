@@ -6,6 +6,7 @@ NutriScan.egg-info/dependency_links.txt
 NutriScan.egg-info/requires.txt
 NutriScan.egg-info/top_level.txt
 src/__init__.py
+src/app.py
 src/exception.py
 src/logger.py
 src/utils.py
@@ -13,6 +14,10 @@ src/components/__init__.py
 src/components/ingest.py
 src/components/train.py
 src/components/transform.py
+src/components/models/__init__.py
+src/components/models/hair_model.py
+src/components/models/nail_model.py
+src/components/models/teeth_model.py
 src/components/preprocessing/__init__.py
 src/components/preprocessing/hair_preprocessor.py
 src/components/preprocessing/nail_preprocessor.py
